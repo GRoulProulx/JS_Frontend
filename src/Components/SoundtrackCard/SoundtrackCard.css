@@ -1,23 +1,6 @@
-:root {
-  --accent: #D4AF37; 
-  --black: #0A0A0A;
-  --dark-gray: #1A1A1A;
-  --medium-gray: #2A2A2A;
-  --light-gray: #333333;
-  --white: #FFFFFF;
-  --off-white: #E0E0E0;
-}
+@import "../../assets/base/colors.css";
 
-.soundtracks-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
-    padding: 1.2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.soundtrack {
+.soundtrack-card {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--accent);
@@ -27,12 +10,14 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.soundtrack:hover {
+.soundtrack-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.7s ease;
+    background-color: var(--medium-gray);
+    box-shadow: var(--accent) 0px 2px 4px;
 }
 
-.soundtrack-img {
+.soundtrack-image {
     aspect-ratio: 1/1;
     object-fit: cover;
 }
@@ -66,7 +51,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
-    position: relative;
+    margin-right: 5px;
 }
 
 .sample-button:hover {
@@ -74,21 +59,8 @@
     color: black;
 }
 
-@media (max-width: 768px) {
-    .soundtracks-list {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 1.5rem;
-    }
-}
 
 @media (max-width: 480px) {
-    .soundtracks-list {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 1rem;
-        padding: 1rem;
-    }
-
     .soundtrack-info h3 {
         font-size: 1rem;
     }
