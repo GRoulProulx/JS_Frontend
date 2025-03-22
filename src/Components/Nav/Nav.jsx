@@ -1,6 +1,8 @@
-import "./Nav.css";
 import { NavLink } from "react-router-dom";
+import "./Nav.css";
 
+// Ressource Pour isActive:
+// https://stackoverflow.com/questions/34418254/how-do-i-add-an-active-class-to-a-link-from-react-router
 function Nav() {
     return (
         <nav className="main-nav">
@@ -10,29 +12,19 @@ function Nav() {
             <div className="nav-links">
                 <ul className="primary-links">
                     <li>
-                        <NavLink
-                            to="/"
-                            className={({ isActive }) =>
-                                isActive ? "active" : ""
-                            }>
+                        <NavLink to="/" >
                             Accueil
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
                             to="/soundtracks-list"
-                            className={({ isActive }) =>
-                                isActive ? "active" : ""
-                            }>
+                            >
                             Bande Sonores
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink
-                            to="/add-soundtrack"
-                            className={({ isActive }) =>
-                                isActive ? "active" : ""
-                            }>
+                        <NavLink to="/add-soundtrack" >
                             Ajouter une bande sonore
                         </NavLink>
                     </li>

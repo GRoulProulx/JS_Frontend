@@ -97,9 +97,8 @@ p {
   padding: 12px 30px;
   font-size: 0.9rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 
 .cta-button:hover {
@@ -149,15 +148,6 @@ p {
   padding-bottom: 10px;
 }
 
-.featured-section h2:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background-color: var(--accent);
-}
 
 .releases-grid {
   display: grid;
@@ -168,7 +158,6 @@ p {
 .release-card {
   background-color: var(--dark-gray);
   transition: transform 0.3s ease;
-  cursor: pointer;
 }
 
 .release-card:hover {

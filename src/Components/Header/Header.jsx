@@ -4,12 +4,9 @@ import "./Header.css";
 function Header() {
     return (
         <header>
-            <a href="/">
-                <Nav />
-            </a>
+            <Nav />
         </header>
     );
 }
 
 export default Header;
-

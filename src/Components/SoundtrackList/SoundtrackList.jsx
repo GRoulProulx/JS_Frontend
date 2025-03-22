@@ -13,8 +13,8 @@ function SoundtracksList() {
                     "https://projetjs-backend.onrender.com/soundtracks"
                 );
                 const dataSoundtracks = await response.json();
-                console.log(dataSoundtracks);
                 setSoundtracks(dataSoundtracks);
+                
             } catch (error) {
                 setError(error);
             }

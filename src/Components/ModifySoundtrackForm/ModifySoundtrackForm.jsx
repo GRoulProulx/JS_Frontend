@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { isInt, isLength, trim } from "validator";
-import "./AddSoundtrackForm.css";
 
-function AddSoundtrackForm() {
-    const formRef = useRef(null);
+function ModifySoundtrackForm() {
+    const { id } = useParams();
+    const formRef = useRef();
     const navigate = useNavigate();
 
     const [genres, setGenres] = useState([]);
-    const [validForm, setValidForm] = useState(false);
     const [formData, setFormData] = useState({
         title: "",
         composer: "",
@@ -25,33 +24,62 @@ function AddSoundtrackForm() {
     const [msg, setMsg] = useState("");
 
     useEffect(() => {
-        setFormData((prevData) => ({
-            ...prevData,
-            genre: genres,
-        }));
-    }, [genres]);
+        async function fetchSoundtrackData() {
+            try {
+                const response = await fetch(
+                    `https://projetjs-backend.onrender.com/soundtracks/${id}`
+                );
+
+                if (!response.ok) {
+                    setMsg("Erreur réseau. Veuillez réessayer plus tard.");
+                }
+
+                const soundtrackData = await response.json();
+
+                setFormData({
+                    title: soundtrackData.title,
+                    composer: soundtrackData.composer,
+                    year: soundtrackData.year,
+                    genre: soundtrackData.genre,
+                    label: soundtrackData.label,
+                    image: soundtrackData.image,
+                    track: {
+                        song: soundtrackData.track.song,
+                        link: soundtrackData.track.link,
+                    },
+                });
+
+                setGenres(soundtrackData.genre);
+            } catch (error) {
+                console.error("Erreur:", error);
+                setMsg("Erreur réseau. Veuillez réessayer plus tard.");
+            }
+        }
+        fetchSoundtrackData();
+    }, []);
 
     useEffect(() => {
-        isFormValid();
-    }, [formData]);
+        const data = { ...formData, genres };
+        setFormData(data);
+    }, [genres]);
 
     function handleChange(event) {
         const field = event.currentTarget;
         const name = field.name;
-        
+
         let value = field.value;
-        let track = formData.track;
+        let track = { ...formData.track };
 
         if (name === "track.song") {
             track.song = value;
+            setFormData({ ...formData, track });
         } else if (name === "track.link") {
             track.link = value;
+            setFormData({ ...formData, track });
         } else {
             value = trim(value);
+            setFormData({ ...formData, [name]: value });
         }
-
-        const newFormData = { ...formData, [name]: value };
-        setFormData(newFormData);
     }
 
     function handleGenre(event) {
@@ -69,7 +97,7 @@ function AddSoundtrackForm() {
         setGenres(newGenres);
     }
 
-    function isFormValid() {
+    function validateForm() {
         const newErrors = {};
 
         if (!isLength(formData.title, { min: 3, max: 100 })) {
@@ -96,7 +124,7 @@ function AddSoundtrackForm() {
             newErrors.trackLink = "Le lien de la piste est requis.";
         }
 
-        if (formData.genre.length === 0) {
+        if (genres.length === 0) {
             newErrors.genre = "Vous devez au moins choisir un genre.";
         }
 
@@ -113,21 +141,18 @@ function AddSoundtrackForm() {
         }
 
         setErrors(newErrors);
-        const isValid = Object.keys(newErrors).length === 0;
-        setValidForm(isValid);
-
-        return isValid;
+        return Object.keys(newErrors).length === 0;
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if (isFormValid()) {
+        if (validateForm()) {
             try {
                 const response = await fetch(
-                    "https://projetjs-backend.onrender.com/soundtracks",
+                    `https://projetjs-backend.onrender.com/soundtracks/${id}`,
                     {
-                        method: "POST",
+                        method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
                         },
@@ -135,24 +160,19 @@ function AddSoundtrackForm() {
                     }
                 );
 
-                if (!response.ok) {
-                    throw new Error("Erreur lors de l'envoi du formulaire");
-                }
-
-                if (response.status === 201) {
-                    setMsg("Formulaire envoyé avec succès");
-                    navigate("/");
+                if (response.ok) {
+                    setMsg("Bande sonore modifiée avec succès");
+                    navigate(`/soundtracks/${id}`);
                 }
             } catch (error) {
-                console.error(error);
-                setMsg("Une erreur est survenue lors de l'envoi du formulaire");
+                setMsg(error);
             }
         }
     }
 
     return (
         <div className="soundtrack-form-container">
-            <h2>Ajouter une Bande Sonore</h2>
+            <h2>Modifier la Bande Sonore</h2>
             {msg && <div className="message">{msg}</div>}
             <form
                 ref={formRef}
@@ -221,6 +241,7 @@ function AddSoundtrackForm() {
                                 name="genre"
                                 value="Rock"
                                 onChange={handleGenre}
+                                checked={genres.includes("Rock")}
                             />
                             Rock
                         </label>
@@ -230,6 +251,7 @@ function AddSoundtrackForm() {
                                 name="genre"
                                 value="Classical"
                                 onChange={handleGenre}
+                                checked={genres.includes("Classical")}
                             />
                             Classical
                         </label>
@@ -239,6 +261,7 @@ function AddSoundtrackForm() {
                                 name="genre"
                                 value="Electronic"
                                 onChange={handleGenre}
+                                checked={genres.includes("Electronic")}
                             />
                             Electronic
                         </label>
@@ -248,6 +271,7 @@ function AddSoundtrackForm() {
                                 name="genre"
                                 value="Orchestral"
                                 onChange={handleGenre}
+                                checked={genres.includes("Orchestral")}
                             />
                             Orchestral
                         </label>
@@ -257,6 +281,7 @@ function AddSoundtrackForm() {
                                 name="genre"
                                 value="Western"
                                 onChange={handleGenre}
+                                checked={genres.includes("Western")}
                             />
                             Western
                         </label>
@@ -266,6 +291,7 @@ function AddSoundtrackForm() {
                                 name="genre"
                                 value="Dramatic"
                                 onChange={handleGenre}
+                                checked={genres.includes("Dramatic")}
                             />
                             Dramatic
                         </label>
@@ -316,16 +342,12 @@ function AddSoundtrackForm() {
                         <div className="error">{errors.trackLink}</div>
                     )}
                 </div>
-
-                <button
-                    type="submit"
-                    className="submit-button"
-                    disabled={!validForm}>
-                    Soumettre
+                <button type="submit" className="submit-button">
+                    Modifier la Bande Sonore
                 </button>
             </form>
         </div>
     );
 }
 
-export default AddSoundtrackForm;
+export default ModifySoundtrackForm;

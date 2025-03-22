@@ -12,7 +12,7 @@ function Home() {
                             <a href="">Collections de bandes sonores</a>
                         </p>
                         <button className="cta-button">
-                            <a href="/soundtracks">Explorer</a>
+                            <a href="/soundtracks-list">Explorer</a>
                         </button>
                     </div>
                 </section>

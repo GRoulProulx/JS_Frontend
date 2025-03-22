@@ -1,6 +1,6 @@
 import React from "react";
-import "./SoundtrackCard.css";
 import { useNavigate } from "react-router-dom";
+import "./SoundtrackCard.css";
 
 function SoundtrackCard(props) {
     const { soundtrack = { title: "", year: "", composer: "", image: "" } } =
@@ -15,7 +15,7 @@ function SoundtrackCard(props) {
         <div className="soundtrack-card">
             <img
                 className="soundtrack-image"
-                src={`img/${soundtrack.image}`}
+                src={`/img/${soundtrack.image}`}
                 alt={soundtrack.title}
             />
             <div className="soundtrack-info">
@@ -31,7 +31,7 @@ function SoundtrackCard(props) {
                     <button
                         className="sample-button"
                         key={soundtrack.id}
-                        onClick={clickDetails}
+                        onClick={clickDetails} 
                         id={soundtrack.id}>
                         Détails
                     </button>
