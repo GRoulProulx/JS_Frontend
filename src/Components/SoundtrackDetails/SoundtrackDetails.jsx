@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import "./SoundtrackDetails.css";
 
+
+/**
+ * Composant pour afficher les détails d'une bande sonore spécifique.
+ */
 function SoundtrackDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -28,6 +33,7 @@ function SoundtrackDetails() {
         fetchSoundtrack();
     }, []);
 
+    
     async function deleteSoundtrack() {
         const response = await fetch(
             `https://projetjs-backend.onrender.com/soundtracks/${id}`,
@@ -47,14 +53,28 @@ function SoundtrackDetails() {
                 alt={soundtrack.title}
                 className="soundtrack-image"
             />
-            <p>Année de sortie: {soundtrack.year}</p>
-            <p>Compositeur: {soundtrack.composer}</p>
-            <p>Label: {soundtrack.label}</p>
-            <p>Genre: {soundtrack.genre.join(", ")}</p>
+            <p>
+                Année de sortie :<br />{" "}
+            </p>
+            <span>{soundtrack.year}</span>
+            <p>
+                Compositeur :<br />{" "}
+            </p>
+            <span>{soundtrack.composer}</span>
+            <p>
+                Label :<br />{" "}
+            </p>
+            <span>{soundtrack.label}</span>
+            <p>
+                Genre :<br />{" "}
+            </p>
+            <span>{soundtrack.genre.join(", ")}</span>
             <Link to={`/soundtracks/edit/${id}`}>
                 <button>Modifier</button>
             </Link>
-            <button onClick={deleteSoundtrack}>Supprimer</button>
+            <button onClick={deleteSoundtrack} className="delete-button">
+                Supprimer
+            </button>
         </div>
     );
 }

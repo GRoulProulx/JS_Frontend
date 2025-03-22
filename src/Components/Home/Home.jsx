@@ -1,4 +1,8 @@
 import "./Home.css";
+
+/**
+ * Composant pour afficher la page d'accueil(landing page).
+ */
 function Home() {
     return (
         <div className="home-container">

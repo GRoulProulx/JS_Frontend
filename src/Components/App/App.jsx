@@ -7,6 +7,8 @@ import SoundtracksList from "../SoundtrackList/SoundtrackList";
 import AddSoundtrackForm from "../AddSoundtrackForm/AddSoundtrackForm";
 import SoundtrackDetails from "../SoundtrackDetails/SoundtrackDetails";
 import ModifySoundtrackForm from "../ModifySoundtrackForm/ModifySoundtrackForm";
+import Page404 from "../error 404/error";
+import AdminSection from "../Admin/Admin";
 
 function App() {
     return (
@@ -28,8 +30,8 @@ function App() {
                         element={<AddSoundtrackForm />}
                     />{" "}
                     <Route path="/soundtracks/edit/:id" element={<ModifySoundtrackForm />} />
-                    <Route path="/admin" element={<Home />} />
-                    <Route path="\*" element={<Home />} />
+                    <Route path="/admin" element={<AdminSection />} />
+                    <Route path="/error" element={<Page404 />} />
                 </Routes>
             </main>
             <Footer />

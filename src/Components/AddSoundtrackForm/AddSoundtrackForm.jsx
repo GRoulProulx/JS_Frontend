@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { isInt, isLength, trim } from "validator";
 import "./AddSoundtrackForm.css";
 
+
+
+/**
+ * Composant de formulaire pour ajouter une nouvelle bande sonore
+ * Gère la saisie, la validation et l'envoi des données au serveur
+ */
 function AddSoundtrackForm() {
     const formRef = useRef(null);
     const navigate = useNavigate();
@@ -35,6 +41,10 @@ function AddSoundtrackForm() {
         isFormValid();
     }, [formData]);
 
+    
+    /**
+     * Gère les changements dans le formulaire et les erreurs de validation
+     */
     function handleChange(event) {
         const field = event.currentTarget;
         const name = field.name;

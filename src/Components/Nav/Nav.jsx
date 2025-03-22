@@ -30,11 +30,9 @@ function Nav() {
                     </li>
                 </ul>
                 <ul className="secondary-links">
+                    
                     <li>
-                        <NavLink to="/about">À propos</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/contact">Contact</NavLink>
+                        <NavLink to="/contact">Admin</NavLink>
                     </li>
                     <li>
                         <NavLink to="/logout">Déconnexion</NavLink>

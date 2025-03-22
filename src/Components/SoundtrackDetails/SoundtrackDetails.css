@@ -1,0 +1,96 @@
+@import "../../assets/base/colors.css";
+
+.soundtrack-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 5px auto;
+}
+
+.soundtrack-details h2 {
+    color: var(--accent);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.soundtrack-details .soundtrack-image {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--light-gray);
+}
+
+.soundtrack-details p {
+    color: var(--primary);
+    margin: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.soundtrack-details span  {
+    color: var(--off-white);
+    margin: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.soundtrack-details button {
+    background-color: var(--light-gray);
+    color: var(--accent);
+    border: none;
+    padding: 8px 16px;
+    margin-top: 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.soundtrack-details .delete-button {
+    background-color: var(--danger); 
+    border: none;
+    padding: 8px 16px;
+    margin-top: 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.soundtrack-details button:hover {
+    background-color: var(--primary);
+    color: black;
+}
+
+.soundtrack-details a {
+    text-decoration: none;
+}
+
+@media (max-width: 480px) {
+    .soundtrack-details {
+        padding: 1rem;
+    }
+    
+    .soundtrack-details h2 {
+        font-size: 1.4rem;
+    }
+    
+    .soundtrack-details p {
+        font-size: 0.9rem;
+    }
+    
+    .soundtrack-details .soundtrack-image {
+        max-width: 200px;
+    }
+}

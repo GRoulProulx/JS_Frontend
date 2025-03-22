@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import "./SoundtrackList.css";
 import SoundtrackCard from "../SoundtrackCard/SoundtrackCard";
+
+
+/**
+ * Composant qui affiche une liste de bandes sonores récupérées depuis l'API.
+ */
+
 function SoundtracksList() {
     // eslint-disable-next-line no-unused-vars
     let [error, setError] = useState(false);

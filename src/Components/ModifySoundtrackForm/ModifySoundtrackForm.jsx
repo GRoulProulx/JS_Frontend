@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { isInt, isLength, trim } from "validator";
 
+
+/**
+ * Composant de formulaire pour modifier une bande sonore existante.
+ */
+
 function ModifySoundtrackForm() {
     const { id } = useParams();
     const formRef = useRef();
@@ -35,7 +40,7 @@ function ModifySoundtrackForm() {
                 }
 
                 const soundtrackData = await response.json();
-
+                // État principal contenant toutes les données du formulaire
                 setFormData({
                     title: soundtrackData.title,
                     composer: soundtrackData.composer,

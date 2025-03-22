@@ -2,6 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./SoundtrackCard.css";
 
+/**
+ * Affiche une carte pour chaque bande sonores
+ */
 function SoundtrackCard(props) {
     const { soundtrack = { title: "", year: "", composer: "", image: "" } } =
         props;
