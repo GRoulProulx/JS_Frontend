@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import "./SoundtrackList.css";
 import SoundtrackCard from "../SoundtrackCard/SoundtrackCard";
-
+import "./SoundtrackList.css";
 
 /**
  * Composant qui affiche une liste de bandes sonores récupérées depuis l'API.
@@ -20,7 +19,6 @@ function SoundtracksList() {
                 );
                 const dataSoundtracks = await response.json();
                 setSoundtracks(dataSoundtracks);
-                
             } catch (error) {
                 setError(error);
             }
@@ -28,11 +26,49 @@ function SoundtracksList() {
         fetchData();
     }, []);
 
+    /*
+     * Filtrer au travers les bandes sonores
+     */
+
+    function filterTitle(event) {
+        const trigger = event.currentTarget;
+        const direction = Number(trigger.dataset.direction);
+        const copy = [...soundtracks];
+
+        copy.sort((a, b) => {
+            if (direction == 1) {
+                return a.title.localeCompare(b.title);
+            } else {
+                return b.title.localeCompare(a.title);
+            }
+        });
+        setSoundtracks(copy);
+    }
+
     return (
-        <div className="soundtracks-list">
-            {soundtracks.map((soundtrack) => (
-                <SoundtrackCard key={soundtrack.id} soundtrack={soundtrack} />
-            ))}
+        <div>
+            <div className="filters">
+                <button
+                    className="filter-button"
+                    onClick={filterTitle}
+                    data-direction="1">
+                    Titre (croissant)
+                </button>
+                <button
+                    className="filter-button"
+                    onClick={filterTitle}
+                    data-direction="-1">
+                    Titre (décroissant)
+                </button>
+            </div>
+            <div className="soundtracks-list">
+                {soundtracks.map((soundtrack) => (
+                    <SoundtrackCard
+                        key={soundtrack.id}
+                        soundtrack={soundtrack}
+                    />
+                ))}
+            </div>
         </div>
     );
 }

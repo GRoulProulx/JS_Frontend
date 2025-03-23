@@ -1,3 +1,5 @@
+@import "../../assets/base/colors.css";
+
 .soundtrack-form-container {
   max-width: 600px;
   margin: 20px auto;
@@ -53,7 +55,6 @@
 
 
 
-
 .submit-button {
   padding: 12px 15px;
   background-color: var(--primary);
@@ -73,12 +74,12 @@
 
 
 .form-group :user-invalid {
-  border-color: var(--color-danger);
+  border-color: var(--danger);
 }
 
 
 .error {
-    color: var(--color-danger);
+    color: var(--danger);
 }
 
 .genre-options {
