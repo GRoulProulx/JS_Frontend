@@ -96,7 +96,9 @@ function ModifySoundtrackForm() {
         if (isChecked && !newGenres.includes(value)) {
             newGenres.push(value);
         } else if (!isChecked && newGenres.includes(value)) {
-            newGenres = newGenres.filter((genre) => genre !== value);
+            newGenres = newGenres.filter((genre) => {
+                return genre != value;
+            });
         }
 
         setGenres(newGenres);
