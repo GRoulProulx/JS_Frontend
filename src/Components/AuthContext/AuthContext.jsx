@@ -1,6 +1,7 @@
-import React, { createContext, useEffect, useState, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
+export const AuthContext = createContext();
 function AuthContextProvider(props) {
     const { children } = props;
     let [token, setToken] = useState(null);
@@ -22,7 +23,7 @@ function AuthContextProvider(props) {
             setUser(null);
         }
     }, [token]);
-}
+
 
 function TokenValidation(token) {
     if (!token) {
@@ -38,6 +39,7 @@ function TokenValidation(token) {
 
 function check() {
     const token = localStorage.getItem("token");
+    
     if (token && TokenValidation(token)) {
         setToken(token);
     } else {
@@ -70,6 +72,6 @@ return (
         }}>
         {children}
     </AuthContext.Provider>
-);
-
+    );
+}
 export default AuthContextProvider;
